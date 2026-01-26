@@ -124,6 +124,8 @@ export function useImageGeneration() {
       });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Failed to generate image";
+      const isRateLimit = message.toLowerCase().includes("rate limit");
+      
       setState(prev => ({
         ...prev,
         isGenerating: false,
@@ -133,8 +135,10 @@ export function useImageGeneration() {
       }));
 
       toast({
-        title: "Generation failed",
-        description: message,
+        title: isRateLimit ? "Please slow down" : "Generation failed",
+        description: isRateLimit 
+          ? "Too many requests. Please wait 10-15 seconds before trying again." 
+          : message,
         variant: "destructive",
       });
     }
