@@ -2,95 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* GenPix Design System - Dark theme with purple/cyan accents */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 240 20% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 240 15% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 240 15% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 265 83% 57%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 240 12% 16%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 10% 14%;
+    --muted-foreground: 215 20% 55%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 240 20% 4%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 240 12% 18%;
+    --input: 240 12% 16%;
+    --ring: 265 83% 57%;
+
+    --radius: 0.75rem;
+
+    /* GenPix Custom Colors */
+    --genpix-purple: 265 83% 57%;
+    --genpix-purple-glow: 280 80% 65%;
+    --genpix-cyan: 195 100% 50%;
+    --genpix-cyan-glow: 185 100% 60%;
+    --genpix-dark: 240 20% 4%;
+    --genpix-card: 240 15% 8%;
+    --genpix-card-hover: 240 15% 12%;
+    --genpix-border: 265 40% 25%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(265 83% 57%) 0%, hsl(195 100% 50%) 100%);
+    --gradient-button: linear-gradient(90deg, hsl(265 83% 57%) 0%, hsl(245 80% 55%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(265 83% 57% / 0.3) 0%, transparent 70%);
+
+    --sidebar-background: 240 15% 6%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 265 83% 57%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 12% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 240 12% 15%;
+    --sidebar-ring: 265 83% 57%;
   }
 }
 
@@ -99,7 +69,116 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    @apply antialiased;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .genpix-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--genpix-purple)) 0%, hsl(var(--genpix-cyan)) 100%);
+  }
+
+  .genpix-card {
+    @apply bg-card border border-border rounded-xl transition-all duration-300;
+  }
+
+  .genpix-card:hover {
+    @apply border-genpix-border;
+    background-color: hsl(var(--genpix-card-hover));
+  }
+
+  .genpix-glow {
+    box-shadow: 0 0 40px -10px hsl(var(--genpix-purple) / 0.5);
+  }
+
+  .genpix-input {
+    @apply bg-secondary border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all;
+  }
+
+  .style-card {
+    @apply relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 border-2 border-transparent;
+  }
+
+  .style-card.selected {
+    @apply border-primary;
+    box-shadow: 0 0 20px -5px hsl(var(--genpix-purple) / 0.6);
+  }
+
+  .style-card:hover:not(.selected) {
+    @apply border-border;
+    transform: translateY(-2px);
+  }
+
+  .aspect-toggle {
+    @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border border-transparent;
+  }
+
+  .aspect-toggle.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .aspect-toggle:not(.active) {
+    @apply bg-secondary text-muted-foreground hover:text-foreground hover:border-border;
+  }
+
+  .generate-btn {
+    @apply w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300;
+    background: linear-gradient(90deg, hsl(var(--genpix-purple)) 0%, hsl(var(--genpix-purple-glow)) 50%, hsl(var(--genpix-cyan)) 100%);
+    background-size: 200% 100%;
+  }
+
+  .generate-btn:hover {
+    background-position: 100% 0;
+    box-shadow: 0 10px 40px -10px hsl(var(--genpix-purple) / 0.6);
+    transform: translateY(-1px);
+  }
+
+  .generate-btn:disabled {
+    @apply opacity-60 cursor-not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .sidebar-nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200;
+  }
+
+  .sidebar-nav-item:hover {
+    @apply bg-sidebar-accent text-sidebar-accent-foreground;
+  }
+
+  .sidebar-nav-item.active {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@layer utilities {
+  .genpix-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .genpix-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .genpix-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .genpix-scrollbar::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
   }
 }
