@@ -82,12 +82,29 @@ serve(async (req) => {
 
     const data = await response.json();
     
+    // Check for errors inside the response (API may return 200 but with error in body)
+    const choiceError = data.choices?.[0]?.error;
+    if (choiceError) {
+      console.error("Error in response choice:", JSON.stringify(choiceError));
+      
+      // Check for rate limit errors in the nested error
+      const rawError = choiceError.metadata?.raw || "";
+      if (rawError.includes("429") || rawError.includes("RESOURCE_EXHAUSTED") || choiceError.code === 429) {
+        return new Response(
+          JSON.stringify({ error: "Rate limit exceeded. Please wait a moment and try again." }),
+          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      
+      throw new Error(choiceError.message || "Image generation failed");
+    }
+    
     // Extract the generated image
     const imageData = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
     
     if (!imageData) {
       console.error("No image in response:", JSON.stringify(data));
-      throw new Error("No image was generated");
+      throw new Error("No image was generated. Please try again.");
     }
 
     return new Response(
